@@ -24,22 +24,21 @@ contract Cert is Ownable {
     uint public adminIndex = 0;
     uint public studentIndex = 0;
     
-     enum  grades {Good, Great, Outstanding, Epic, Legendary}
+    enum  grades {Good, Great, Outstanding, Epic, Legendary}
      
-     enum assignmentStatus {Inactive, Pending, Completed, Cancelled}
+    enum assignmentStatus {Inactive, Pending, Completed, Cancelled}
     
-     struct Admin {
+    struct Admin {
          bool authorized;
          uint id;
-     }
+    }
      
-     struct Assignment {
+    struct Assignment {
          string link;
          assignmentStatus status;
-     }
+    }
      
-     
-      struct Student {
+    struct Student {
          bytes32 firstName;
          bytes32 lastName;
          bytes32 commendation;
@@ -48,13 +47,12 @@ contract Cert is Ownable {
          bool active;
          string email;
         mapping (uint16 => Assignment) assignments;
-     }
-    
+    }
      
-     mapping (address => Admin) public admins;
-     mapping (uint => address) public adminsReverseMapping;
-     mapping (uint => Student) public students;
-     mapping (string => uint) private studentsReverseMapping;
+    mapping (address => Admin) public admins;
+    mapping (uint => address) public adminsReverseMapping;
+    mapping (uint => Student) public students;
+    mapping (string => uint) private studentsReverseMapping;
     
     constructor () public {
        maxAdmins = 2;
@@ -128,7 +126,6 @@ contract Cert is Ownable {
     }
    
     function transferOwnership (address _addr)  public {
-        
         _removeAdmin(msg.sender);
         _addAdmin(_addr);
         super.transferOwnership(_addr);
@@ -154,7 +151,7 @@ contract Cert is Ownable {
         emit StudentAdded(_email,_firstName, _lastName, _commendation, _grade);
     }
     
-     function removeStudent(string memory _email) public  onlyAdmins onlyValidStudents(_email)  {
+    function removeStudent(string memory _email) public  onlyAdmins onlyValidStudents(_email)  {
       students[studentsReverseMapping[_email]].active = false;
       emit StudentRemoved(_email);
     }
@@ -194,6 +191,7 @@ contract Cert is Ownable {
          
         return assignmentIndex;
     }
+    
     function addAssignment(string memory _email, string memory _link, assignmentStatus _status, bool isFinalProject) public onlyAdmins onlyValidStudents(_email) {
         _calcAndFetchAssignmentIndex(students[studentsReverseMapping[_email]], isFinalProject);
         students[studentsReverseMapping[_email]].assignments[students[studentsReverseMapping[_email]].assignmentIndex] = Assignment(_link, _status);
