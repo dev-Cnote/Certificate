@@ -3,6 +3,7 @@ import Cert from '../build/contracts/Cert.json';
 
 let web3;
 let cert;
+
 const initWeb3 = () => {
 return new Promise((resolve, reject) => {
     if(typeof window.ethereum !== 'undefined') {
@@ -26,6 +27,7 @@ return new Promise((resolve, reject) => {
     resolve(new Web3('http://localhost:9545'));
   });
 }  
+
 const initContract = () => {
   const deploymentKey = Object.keys(Cert.networks)[0];
   return new web3.eth.Contract(
@@ -89,31 +91,17 @@ const initApp = () => {
   const witResult = document.getElementById('wit-result');
   
   let accounts = [];
-//let accounts = [owner, nonOwner];
-//var accountInterval = setInterval(function() {
-web3.eth.getAccounts().then(_accounts => {
-accounts = _accounts;
-});
-//}, 100);
-	//var accountInterval = setInterval(function() {
-   //Check if account has changed
-//	if (web3.eth.accounts[0] !== accounts) {
-     
-  //  accounts = web3.eth.accounts[0];
-//		Call some function to update the UI with the new account
-    //ty(accounts);
-  //}
-//}, 100);
 
-  //function ty(acc) {
-//	  return cert.methods.addAdmin(acc).send({from: accounts})}
+  web3.eth.getAccounts().then(_accounts => {
+	accounts = _accounts;
+	});
 
     addAdmin.addEventListener('submit', (e) => {
     e.preventDefault();
     const addr = e.target.elements[0].value;
     cert.methods.addAdmin(addr).send({from:accounts[0]})
     .then(result => {
-      addResult.innerHTML = `New address added successfully created`;
+      addResult.innerHTML = `New admin added successfully`;
     })
     .catch(_e => {
       addResult.innerHTML = `error....only accessible by Owner, ensure maxAdmin hasn't beenreach`;
@@ -125,7 +113,7 @@ accounts = _accounts;
     const addr = e.target.elements[0].value;
     cert.methods.removeAdmin(addr).send({from: accounts[0]})
     .then(result => {
-      removeResult.innerHTML = `adddress removed`;
+      removeResult.innerHTML = `admin removed`;
     })
     .catch(_e => {
       removeResult.innerHTML = `error....only accessible by Owner`;
@@ -152,7 +140,7 @@ accounts = _accounts;
       transferResult.innerHTML = `Ownership transferred`;
     })
     .catch(_e => {
-      transferResult.innerHTML = `error....only accessible by Owner`;
+      transferResult.innerHTML = `error....only accessible by Owner, must have 2 admins present`;
     });
   });
 
@@ -165,7 +153,7 @@ renounceOwnership.addEventListener('submit', (e) => {
       renounceResult.innerHTML = `Ownership Renounced`;
     })
     .catch(_e => {
-      renounceResult.innerHTML = `error....only accessible by Owner`;
+      renounceResult.innerHTML = `error....only accessible by Owner, must have 2 admins present`;
     });
   });
 
@@ -193,7 +181,7 @@ renounceOwnership.addEventListener('submit', (e) => {
       removeStudentResult.innerHTML = `Student removed`;
     })
     .catch(_e => {
-      removeStudentResult.innerHTML = `error....only accessible by Owner, existing email`;
+      removeStudentResult.innerHTML = `error....only accessible by Owner, email doesn't exist`;
     });
   });
 
@@ -281,15 +269,15 @@ updateAssignmentStatus.addEventListener('submit', (e) => {
 
 	getAssignmentInfo.addEventListener('submit', (e) => {
     e.preventDefault();
-    const id = e.target.elements[0].value;
-    const ids = e.target.elements[1].value;
-        cert.methods.getAssignmentInfo(id, ids).call()
+    const email = e.target.elements[0].value;
+    const assId = e.target.elements[1].value;
+        cert.methods.getAssignmentInfo(email, assId).call()
     .then(result => {
       stuResult.innerHTML = `admin Id: ${result[0]}
        ${result[1]}`;
     })
     .catch(_e => {
-      stuResult.innerHTML = `Ooops... there was an error while trying to read user ${id}`;
+      stuResult.innerHTML = `error.....email doesn't exist, assignmentIndex not correct`;
     });
   });
 
@@ -301,7 +289,7 @@ updateAssignmentStatus.addEventListener('submit', (e) => {
       maxResult.innerHTML = `maxAdmins ${result[0]} `;
     })
     .catch(() => {
-      maxResult.innerHTML = `Ooops... there was an error while trying to read user ${id}`;
+      maxResult.innerHTML = `error`;
     });
   });
 
@@ -309,10 +297,10 @@ updateAssignmentStatus.addEventListener('submit', (e) => {
     e.preventDefault();
 	cert.methods.adminIndex().call()
     .then(result => {
-      indexResult.innerHTML = `maxAdmins ${result[0]} `;
+      indexResult.innerHTML = `adminIndex ${result[0]} `;
     })
     .catch(() => {
-      indexResult.innerHTML = `Ooops... there was an error while trying to read user ${id}`;
+      indexResult.innerHTML = `error`;
     });
   });
 
@@ -321,10 +309,10 @@ updateAssignmentStatus.addEventListener('submit', (e) => {
     e.preventDefault();
 	cert.methods.studentIndex().call()
     .then(result => {
-      stResult.innerHTML = `maxAdmins ${result[0]} `;
+      stResult.innerHTML = `studentIndex ${result[0]} `;
     })
     .catch(_e => {
-      stResult.innerHTML = `Ooops... there was an error while trying to read user ${id}`;
+      stResult.innerHTML = `error`;
     });
   });
 
@@ -346,7 +334,7 @@ ownerAddress.addEventListener('submit', (e) => {
       ownerResult.innerHTML = `${accounts[0]}`;
     })
     .catch(_e => {
-      isResult.innerHTML = `Ooops... there was an error while trying to read user ${id}`;
+      isResult.innerHTML = `error`;
     });
   });
 
@@ -358,7 +346,7 @@ admins.addEventListener('submit', (e) => {
       adminsResult.innerHTML = `authorized ${result[0]} id ${result[1]} `;
     })
     .catch(_e => {
-      adminsResult.innerHTML = `Ooops... there was an error while trying to read user ${id}`;
+      adminsResult.innerHTML = `error`;
     });
   });
 
@@ -370,7 +358,7 @@ adminsReverseMapping.addEventListener('submit', (e) => {
       minResult.innerHTML = `admin Id: ${accounts[0]} `;
     })
     .catch(_e => {
-      minResult.innerHTML = `Ooops... there was an error while trying to read user `;
+      minResult.innerHTML = `there was an error while trying to read user `;
     });
   });
 
@@ -379,12 +367,12 @@ students.addEventListener('submit', (e) => {
     const id = e.target.elements[0].value;
 	cert.methods.students(id).call()
     .then(result => {
-      stuResult.innerHTML = `admin Id: ${result[0]}
+      stuResult.innerHTML = `student Id: ${result[0]}
        ${result[1]} ${result[2]} ${result[3]} ${result[4]}
        ${result[5]} ${result[6]}`;
     })
     .catch(_e => {
-      stuResult.innerHTML = `Ooops... there was an error while trying to read user ${id}`;
+      stuResult.innerHTML = `there was an error while trying to read user`;
     });
   });
 
@@ -399,8 +387,7 @@ donateEth.addEventListener('submit', (e) => {
     e.preventDefault();
     const deploymentKey = Object.keys(Cert.networks)[0];
     const amount = e.target.elements[0].value;
-
-	web3.eth.sendTransaction({from: accounts[0], to: Cert.networks[deploymentKey].address, value: web3.utils.toWei(amount, 'ether')})
+    web3.eth.sendTransaction({from: accounts[0], to: Cert.networks[deploymentKey].address, value: web3.utils.toWei(amount, 'ether')})
   });
 
 withdrawEth.addEventListener('submit', (e) => {
@@ -408,12 +395,14 @@ withdrawEth.addEventListener('submit', (e) => {
 
         cert.methods.withdrawEth().send({from: accounts[0]})
     .then(result => {
-      minResult.innerHTML = `waldrawal successful `;
+      minResult.innerHTML = `withdraw successful `;
     })
     .catch(_e => {
-      minResult.innerHTML = `Ooops... there was an error while trying to read user `});})
+      minResult.innerHTML = `error`});
+})
 };
- document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener('DOMContentLoaded', () => {
   initWeb3()
     .then(_web3 => {
       web3 = _web3;
