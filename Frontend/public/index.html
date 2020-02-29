@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="bundle.js"></script>
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class = 'header'> <h1>Certification Smart Contract</h1></div>
+          <div class = 'body5'><form id="addAdmin">
+            <h2>Add Admin</h2>
+            <div class="form-garoup">
+              <label for="address">address</label>
+              <input id="address" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="add-result"></p>
+          </form>
+
+
+          <form id="removeAdmin">
+            <h2>Remove Admin</h2>
+            <div class="form-group">
+              <label for="remove-admin">address</label>
+              <input id="remove-admin" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="remove-result"></p>
+          </form>
+
+
+          <form id="changeAdminLimit">
+            <h2>Change Admin Limit</h2>
+            <div class="form-group">
+              <label for="change-Admin-Limit">number</label>
+              <input id="change-Admin-Limit" type="number" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="change-result"></p>
+          </form>
+
+
+          <form id="transferOwnership">
+            <h2>Transfer Ownership</h2>
+            <div class="form-group">
+              <label for="transfer-ownership">address</label>
+              <input id="transfer-ownership" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="transfer-result"></p>
+          </form>
+
+
+          <form id="renounceOwnership">
+            <h2>Renounce Ownership</h2>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="renounce-result"></p>
+          </form></div>
+
+<div class = 'body1'>
+          <form id="addStudent">
+            <h2>AddStudent</h2>
+            <div class="form-group">
+              <label for="add-fName">first name</label>
+              <input id="add-fName" type="" class="form-control"></input>
+              <label for="add-lname">last name</label>
+              <input id="add-lname" type="" class="form-control"></input>
+              <label for="add-commd">commendation</label>
+              <input id="add-commd" type="" class="form-control"></input>
+              <label for="add-grade">grade</label>
+              <input id="add-grade" type="number" class="form-control"></input>
+              <label for="add-email">email</label>
+              <input id="add-email" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="add-student-result"></p>
+          </form>
+
+
+          <form id="removeStudent">
+            <h2>Remove Student</h2>
+            <div class="form-group">
+              <label for="remove-student">email</label>
+              <input id="remove-student" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="remove-student-result"></p>
+          </form>
+
+
+          <form id="changeStudentName">
+            <h2>Change Student Name</h2>
+            <div class="form-group">
+              <label for="change-student-email">email</label>
+              <input id="change-student-email" type="" class="form-control"></input>
+              <label for="change-student-name">first name</label>
+              <input id="change-student-fname" type="" class="form-control"></input>
+              <label for="change-student-lname">last name</label>
+              <input id="change-student-lname" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="student-name-result"></p>
+          </form>
+
+
+          <form id="changeStudentCommendation">
+            <h2>Change Student Commendation</h2>
+            <div class="form-group">
+              <label for="change-student-email">email</label>
+              <input id="change-student-email1" type="" class="form-control"></input>
+             <label for="change-student-commendation">commendation</label>
+              <input id="change-student-commendation" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="student-commendation-result"></p>
+          </form>
+
+
+           <form id="changeStudentGrade">
+            <h2>Change Student Grade</h2>
+            <div class="form-group">
+              <label for="change-student-email">email</label>
+              <input id="change-student-email2" type="" class="form-control"></input>
+             <label for="change-student-grade">grade</label>
+              <input id="change-student-grade" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="student-grade-result"></p>
+          </form>
+
+
+          <form id="changeStudentEmail">
+            <h2>Change Student Email</h2>
+            <div class="form-group">
+              <label for="change-student-email">email</label>
+              <input id="change-student-email3" type="" class="form-control"></input>
+             <label for="change-student-new-email">new email</label>
+              <input id="change-student-new-email" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="student-email-result"></p>
+          </form>
+
+
+
+          <form id="addAssignment">
+          <h2>Add Assignment</h2>
+            <div class="form-group">
+              <label for="add-Assignment-email">email</label>
+              <input id="add-Assignment-email4" type="" class="form-control"></input>
+             <label for="add-Assignment-link">link</label>
+              <input id="add-Assignment-link" type="" class="form-control"></input>
+              <label for="add-Assignment-status">status</label>
+              <input id="add-Assignment-status" type="number" class="form-control"></input>
+              <label for="add-Assignment-fProject">isFinalProject</label>
+              <input id="add-Assignment-fProject" type="" class="form-control"></input>
+</div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <p id="add-assignment-result"></p>
+            </form>
+
+             <form id="updateAssignmentStatus">
+            <h2>Update Assignment Status</h2>
+            <div class="form-group">
+              <label for="update-assignment-email">email</label>
+              <input id="update-assignment-email" type="" class="form-control"></input>
+              <label for="update-assignment-status">status</label>
+              <input id="update-assignment-status" type="number" class="form-control"></input>
+              <label for="update-assignment-fProject">isFinalProject</label>
+              <input id="update-assignment-fProject" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="update-assignment-result"></p>
+          </form>
+
+
+          <form id="getAssignmentInfo">
+            <h2>get Assignment Info</h2>
+            <div class="form-group">
+              <label for="get-aAssignment-email">email</label>
+              <input id="get-aAssignment-email" type="" class="form-control"></input>
+              <label for="get-aAssignment-id">assignmentIndex</label>
+              <input id="get-aAssignment-id" type="number" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="get-assignment-result"></p>
+          </form>
+
+          </div>
+<div class = 'body2'>
+          <form id="maxAdmins">
+           <h2>Max Admin</h2>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="max-result"></p>
+          </form>
+
+           <form id="adminIndex">
+            <h2>Admin Index</h2>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="id-result"></p>
+          </form>
+
+           <form id="studentIndex">
+            <h2>Student Index</h2>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="st-result"></p>
+          </form>
+
+           <form id="isOwner">
+            <h2>Is Owner</h2>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="is-result"></p>
+          </form>
+
+           <form id="ownerAddress">
+            <h2>Owner Address</h2>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="owner-result"></p>
+          </form>
+            <form id="admins">
+            <h2>admins</h2>
+            <div class="form-group">
+              <label for="admins-addr">addr</label>
+              <input id="admins" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="admins-result"></p>
+          </form>
+           <form id="adminsReverseMapping">
+            <h2>admins Reverse Mapping</h2>
+            <div class="form-group">
+              <label for="admins-id">Id</label>
+              <input id="adminss" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="min-result"></p>
+          </form>
+
+          <form id="students">
+            <h2>students</h2>
+            <div class="form-group">
+              <label for="students-id">Id</label>
+              <input id="studentss" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="stu-result"></p>
+          </form>
+            <form id="ownBal">
+            <h2>oOwn Bal</h2>
+            <div class="form-group">
+              <label for="own-b">Id</label>
+              <input id="own-ba" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="own-result"></p>
+          </form>
+          <form id="donateEth">
+            <h2>Donate ETH</h2>
+            <div class="form-group">
+              <label for="ETH">Id</label>
+              <input id="don" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="don-result"></p>
+          </form>
+
+          <form id="withdrawEth">
+            <h2>withdraw ETH</h2>
+            <div class="form-group">
+              <label for="wEth">Id</label>
+              <input id="wiEth" type="" class="form-control"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <p id="wit-result"></p>
+          </form></div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
