@@ -91,11 +91,12 @@ const initApp = () => {
   const witResult = document.getElementById('wit-result');
   
   let accounts = [];
-
+  let accountInterval = setInterval(function() {
   web3.eth.getAccounts().then(_accounts => {
 	accounts = _accounts;
 	});
-
+   }, 100);
+  
     addAdmin.addEventListener('submit', (e) => {
     e.preventDefault();
     const addr = e.target.elements[0].value;
@@ -169,7 +170,7 @@ renounceOwnership.addEventListener('submit', (e) => {
       addStudentResult.innerHTML = `Student added`;
     })
     .catch(_e => {
-      addStudentResult.innerHTML = `error....only accessible by Owner, existing email`;
+      addStudentResult.innerHTML = `error....only accessible by ,admins existing email`;
     });
   });
 
@@ -181,7 +182,7 @@ renounceOwnership.addEventListener('submit', (e) => {
       removeStudentResult.innerHTML = `Student removed`;
     })
     .catch(_e => {
-      removeStudentResult.innerHTML = `error....only accessible by Owner, email doesn't exist`;
+      removeStudentResult.innerHTML = `error....only accessible by Admin, email doesn't exist`;
     });
   });
 
@@ -195,7 +196,7 @@ renounceOwnership.addEventListener('submit', (e) => {
       studentNameResult.innerHTML = `Student name changed`;
     })
     .catch(_e => {
-      studentNameResult.innerHTML = `error....only accessible by Owner, email doesn't exist`;
+      studentNameResult.innerHTML = `error....only accessible by Admin, email doesn't exist`;
     });
   });
 
@@ -208,7 +209,7 @@ renounceOwnership.addEventListener('submit', (e) => {
       studentCommendationResult.innerHTML = `Student commendation changed`;
     })
     .catch(() => {
-      studentCommendationResult.innerHTML = `error....only accessible by Owner, email doesn't exist`;
+      studentCommendationResult.innerHTML = `error....only accessible by Admin, email doesn't exist`;
     });
   });
 
@@ -221,7 +222,7 @@ renounceOwnership.addEventListener('submit', (e) => {
       studentEmailResult.innerHTML = `Student email changed`;
     })
     .catch(_e => {
-      studentEmailResult.innerHTML = `error....only accessible by Owner, email doesn't exist`;
+      studentEmailResult.innerHTML = `error....only accessible by Admin, email doesn't exist`;
     });
   });
 
@@ -234,7 +235,7 @@ renounceOwnership.addEventListener('submit', (e) => {
       studentGradeResult.innerHTML = `Student grade changed`;
     })
     .catch(_e => {
-      studentGradeResult.innerHTML = `error....only accessible by Owner, email doesn't exist`;
+      studentGradeResult.innerHTML = `error....only accessible by Admin, email doesn't exist`;
     });
   });
 
@@ -249,7 +250,7 @@ addAssignment.addEventListener('submit', (e) => {
       addAssignmentResult.innerHTML = `Student assignment added`;
     })
     .catch(_e => {
-      addAssignmentResult.innerHTML = `error....only accessible by Owner, email doesn't exist`;
+      addAssignmentResult.innerHTML = `error....only accessible by Admin, email doesn't exist`;
     });
   });
 
@@ -263,7 +264,7 @@ updateAssignmentStatus.addEventListener('submit', (e) => {
       updateAssignmentResult.innerHTML = `Student assignment updated`;
     })
     .catch(_e => {
-      updateAssignmentResult.innerHTML = `error....only accessible by Owner, email doesn't exist`;
+      updateAssignmentResult.innerHTML = `error....only accessible by Admin, email doesn't exist`;
     });
   });
 
@@ -320,10 +321,10 @@ isOwner.addEventListener('submit', (e) => {
     e.preventDefault();
 	cert.methods.isOwner().call()
     .then(result => {
-      isResult.innerHTML = `true`;
+      isResult.innerHTML = `${result}`;
     })
     .catch(_e => {
-      isResult.innerHTML = `false`;
+      isResult.innerHTML = `${result}`;
     });
   });
 
@@ -331,7 +332,7 @@ ownerAddress.addEventListener('submit', (e) => {
     e.preventDefault();
 	cert.methods.owner().call()
     .then(result => {
-      ownerResult.innerHTML = `${accounts[0]}`;
+      ownerResult.innerHTML = `${result}`;
     })
     .catch(_e => {
       isResult.innerHTML = `error`;
@@ -355,7 +356,7 @@ adminsReverseMapping.addEventListener('submit', (e) => {
     const email = e.target.elements[0].value;
 	cert.methods.adminsReverseMapping(email).call()
     .then(result => {
-      minResult.innerHTML = `admin Id: ${accounts[0]} `;
+      minResult.innerHTML = `admin Id: ${result} `;
     })
     .catch(_e => {
       minResult.innerHTML = `there was an error while trying to read user `;
