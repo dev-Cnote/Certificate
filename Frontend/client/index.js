@@ -274,7 +274,7 @@ updateAssignmentStatus.addEventListener('submit', (e) => {
     const assId = e.target.elements[1].value;
         cert.methods.getAssignmentInfo(email, assId).call()
     .then(result => {
-      stuResult.innerHTML = `admin Id: ${result[0]}
+      getAssignmentResult.innerHTML = `link: ${result[0]} <br> status:
        ${result[1]}`;
     })
     .catch(_e => {
@@ -381,7 +381,7 @@ students.addEventListener('submit', (e) => {
 ownBal.addEventListener('submit', (e) => {
     e.preventDefault();
     const id = e.target.elements[0].value;
-    web3.eth.getBalance(id, (err, bal) => {console.log(bal)});
+    web3.eth.getBalance(id, (err, bal) => {ownResult.innerHTML = web3.utils.fromWei(bal, 'ether')});
 });
 	 
 donateEth.addEventListener('submit', (e) => {
@@ -396,10 +396,10 @@ withdrawEth.addEventListener('submit', (e) => {
 
         cert.methods.withdrawEth().send({from: accounts[0]})
     .then(result => {
-      minResult.innerHTML = `withdraw successful `;
+      witResult.innerHTML = `withdraw successful `;
     })
     .catch(_e => {
-      minResult.innerHTML = `error`});
+      witResult.innerHTML = `error`});
 })
 };
 
