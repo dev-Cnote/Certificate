@@ -1,4 +1,3 @@
-import Web3 from 'web3';
 import Cert from '../build/contracts/Cert.json';
 
 let web3;
