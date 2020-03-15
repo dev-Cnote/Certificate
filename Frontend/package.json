@@ -14,16 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "path": "^0.12.7",
-    "web3": "^1.2.6",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
-  "devDependencies": {
-    "webpack-serve": "^3.2.0"
-  },
-  "optionalDependencies": {
-    "bufferutil": "^4.0.1",
-    "utf-8-validate": "^5.0.2"
-  }
+  "devDependencies": {},
+  "optionalDependencies": {}
 }
