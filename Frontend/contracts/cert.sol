@@ -146,15 +146,6 @@ contract Cert is Ownable {
     }
     
     function _removeAdmin(address _addr) private  {
-        // Function will run even if the admin is not authorized, so a fake addres will also result in decreasing adminIndex
-        // run it inside the autorize conditional logic
-        // also, the function will run well for 2 admins but will be incorrect when the number increses
-        // since the last adminIndex is getting swapped with the second last admin index
-        // revisit this
-        
-        // Suggestable Logic :
-        
-        
         if (adminIndex == 1) {
             revert('admin must be present');
         }
